@@ -1,6 +1,9 @@
 package pl.edu.pw.ii.tkom.lkamins1;
 
-import java.io.FileNotFoundException;
+import pl.edu.pw.ii.tkom.lkamins1.exceptions.*;
+import pl.edu.pw.ii.tkom.lkamins1.exceptions.IllegalStateException;
+
+import java.io.IOException;
 
 /**
  * Created by lucas on 11.05.14.
@@ -10,20 +13,23 @@ public class Configuration {
     private Parser parser;
     private Property root;
 
-    public Configuration() {
+    public Configuration(String filename) throws IOException, IllegalStateException, WrongValueTypeException, EndOfFileException {
+        fromFile(filename);
+    }
+
+
+    private void fromFile(String fileName) throws IOException, IllegalStateException, WrongValueTypeException, EndOfFileException {
         parser = new Parser();
-        root = new Property();
+        parser.useFile(fileName);
+        parser.parse();
+        root = parser.getRoot();
     }
 
-
-    public void fromFile(String fileName) throws FileNotFoundException {
-            parser.useFile(fileName);
-    }
     public void saveToFile(String fileName) {
 
     }
-    public Property getProperty(String propertyName) {
-        return new Property();
+    public Property getProperty(String path) {
+       return root.getFromPath(path);
     }
     public void insert(String propertyName) {
 

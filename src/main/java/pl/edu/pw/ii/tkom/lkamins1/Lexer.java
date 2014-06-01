@@ -43,7 +43,10 @@ class Lexer {
         }
         if(tokenState == TokenState.ILLEGAL)
             throw new IllegalStateException();
-        return builtToken;
+        if(builtToken instanceof CommentTagToken)
+            return getNextToken();
+        else
+            return builtToken;
     }
 
     private TokenState getNextStateAndFillTokenData(TokenState actualState) throws IOException, EndOfFileException, WrongValueTypeException {

@@ -44,6 +44,10 @@ public class Property implements Comparable<Property> {
         }
     }
 
+    public Property getFromPath(String path) {
+        PathParser.getPathAtom
+    }
+
     public String[] getChildrenAsStringArray(String nodeName) { return new String[]{}; }
     public Integer[] getChildrenAsIntArray(String nodeName) { return new Integer[]{}; }
     public Double[] getChildrenAsDoubleArray(String nodeName) { return new Double[]{}; }
