@@ -1,4 +1,4 @@
-package pl.edu.pw.ii.tkom.lkamins1;
+package pl.edu.pw.ii.tkom.lkamins1.parsers;
 
 import pl.edu.pw.ii.tkom.lkamins1.stateMachines.ValueState;
 
@@ -49,7 +49,7 @@ public class ValueParser {
                 doCount = true;
             } else if(state == ValueState.DOUBLE_POST_DIGIT) {
                 int digit = Character.getNumericValue(c);
-                double toAdd = Math.pow(digit, negativePowerCount);
+                double toAdd = digit * Math.pow(10, negativePowerCount);
                 retVal += toAdd;
             } else if(state == ValueState.DOUBLE_NEGATIVE) {
                 negative = true;

@@ -10,6 +10,9 @@ public enum TokenState {
         public TokenState nextState(char ch) {
             switch (ch) {
                 case '<': return TAG_INIT;
+                case ' ':
+                case '\n':
+                case '\t': return INITIAL;
                 default : return VALUE;
             }
         }
@@ -41,7 +44,22 @@ public enum TokenState {
             switch (ch) {
                 case ' ': return TAG_OPEN_WHITESPACE;
                 case '>': return ILLEGAL;
-                default : return TAG_OPEN_INIT;
+                default : return TAG_OPEN_TAG;
+            }
+        }
+        @Override
+        public boolean isTerminal() {
+            return terminal;
+        }
+    },
+    TAG_OPEN_TAG {
+        boolean terminal = false;
+        @Override
+        public TokenState nextState(char ch) {
+            switch (ch) {
+                case ' ': return TAG_OPEN_WHITESPACE;
+                case '>': return ILLEGAL;
+                default : return TAG_OPEN_TAG;
             }
         }
         @Override
